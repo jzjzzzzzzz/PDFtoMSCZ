@@ -1,5 +1,5 @@
 # AutoTranspose: PDF to MuseScore Converter
-
+ 
 AutoTranspose is a Python tool that converts PDF sheet music into editable MuseScore (.mscz) files. It integrates Audiveris for Optical Music Recognition (OMR) and MuseScore 4 for final score conversion.
 
 The project is designed to simplify the digitization of printed sheet music and make it ready for editing, playback, and transposition.
