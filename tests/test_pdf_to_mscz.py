@@ -9,10 +9,13 @@ import pdf_to_mscz as pipeline
 
 class CommandBuildingTests(unittest.TestCase):
     def test_audiveris_command_enables_batch_ocr_controls(self):
+        audiveris = Path("tools") / "audiveris"
+        pdf = Path("scores") / "input score.pdf"
+        output = Path("output")
         command = pipeline.build_audiveris_command(
-            Path("/tools/audiveris"),
-            Path("/scores/input score.pdf"),
-            Path("/output"),
+            audiveris,
+            pdf,
+            output,
             languages="eng+deu",
             sheets=("1", "4-6"),
             force=True,
@@ -22,7 +25,7 @@ class CommandBuildingTests(unittest.TestCase):
         self.assertEqual(
             command,
             [
-                "/tools/audiveris",
+                str(audiveris),
                 "-batch",
                 "-transcribe",
                 "-export",
@@ -36,9 +39,9 @@ class CommandBuildingTests(unittest.TestCase):
                 "1",
                 "4-6",
                 "-output",
-                "/output",
+                str(output),
                 "--",
-                "/scores/input score.pdf",
+                str(pdf),
             ],
         )
 
