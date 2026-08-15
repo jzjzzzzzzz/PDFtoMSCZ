@@ -1,4 +1,4 @@
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import subprocess
 import tempfile
 import unittest
@@ -51,6 +51,17 @@ class CommandBuildingTests(unittest.TestCase):
         )
         self.assertIn("-save", command)
         self.assertLess(command.index("--"), command.index("score.pdf"))
+
+    def test_audiveris_command_preserves_windows_paths(self):
+        audiveris = PureWindowsPath(r"C:\Program Files\Audiveris\Audiveris.exe")
+        pdf = PureWindowsPath(r"C:\Scores\input score.pdf")
+        output = PureWindowsPath(r"C:\Scores\OMR output")
+
+        command = pipeline.build_audiveris_command(audiveris, pdf, output)
+
+        self.assertEqual(command[0], r"C:\Program Files\Audiveris\Audiveris.exe")
+        self.assertEqual(command[command.index("-output") + 1], r"C:\Scores\OMR output")
+        self.assertEqual(command[-1], r"C:\Scores\input score.pdf")
 
     def test_musescore_command_uses_output_extension(self):
         self.assertEqual(

@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 import os
-from pathlib import Path
+from pathlib import Path, PurePath
 import re
 import shlex
 import shutil
@@ -76,9 +76,9 @@ def resolve_executable(
 
 
 def build_audiveris_command(
-    audiveris: Path,
-    pdf: Path,
-    output_dir: Path,
+    audiveris: PurePath,
+    pdf: PurePath,
+    output_dir: PurePath,
     languages: Optional[str] = None,
     sheets: Sequence[str] = (),
     force: bool = False,
@@ -103,7 +103,9 @@ def build_audiveris_command(
     return command
 
 
-def build_musescore_command(musescore: Path, musicxml: Path, output: Path) -> List[str]:
+def build_musescore_command(
+    musescore: PurePath, musicxml: PurePath, output: PurePath
+) -> List[str]:
     """Build the MuseScore conversion command."""
     return [str(musescore), str(musicxml), "-o", str(output)]
 
