@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Backward-compatible entry point for the original script name."""
+"""Direct script entry point using the correctly spelled MSCZ name."""
 
 from pdf_to_mscz import main
 

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-to-mscz"
+version = "0.2.0"
+description = "Convert PDF sheet music to MuseScore with Audiveris OMR"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "jzjzzzzzzz" }]
+dependencies = []
+
+[project.scripts]
+pdf-to-mscz = "pdf_to_mscz:main"
+
+[tool.setuptools]
+py-modules = ["pdf_to_mscz"]
