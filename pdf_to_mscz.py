@@ -156,7 +156,13 @@ def find_new_exports(output_dir: Path, input_stem: str, before: Snapshot) -> Lis
         signature = (stat.st_mtime_ns, stat.st_size)
         if before.get(path.resolve()) != signature:
             exports.append(path.resolve())
-    return sorted(exports, key=lambda item: item.name.casefold())
+    return sorted(
+        exports,
+        key=lambda item: (
+            item.stem.casefold() != input_stem.casefold(),
+            item.name.casefold(),
+        ),
+    )
 
 
 def normalize_sheets(values: Sequence[str]) -> List[str]:
